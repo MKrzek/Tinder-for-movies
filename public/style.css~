@@ -61,7 +61,7 @@
 /******/ 	
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "a8bf33bbde3cabe5cc87"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "e241eb4507d4a8c2153d"; // eslint-disable-line no-unused-vars
 /******/ 	var hotRequestTimeout = 10000;
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule; // eslint-disable-line no-unused-vars
@@ -722,7 +722,7 @@
 /******/ 	__webpack_require__.h = function() { return hotCurrentHash; };
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return hotCreateRequire(214)(__webpack_require__.s = 214);
+/******/ 	return hotCreateRequire(215)(__webpack_require__.s = 215);
 /******/ })
 /************************************************************************/
 /******/ ({
@@ -778,7 +778,7 @@ module.exports.setLogLevel = function(level) {
 
 /***/ }),
 
-/***/ 21:
+/***/ 17:
 /***/ (function(module, exports) {
 
 var g;
@@ -806,17 +806,17 @@ module.exports = g;
 
 /***/ }),
 
-/***/ 214:
+/***/ 215:
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(37);
+__webpack_require__(38);
 __webpack_require__(57);
-module.exports = __webpack_require__(215);
+module.exports = __webpack_require__(216);
 
 
 /***/ }),
 
-/***/ 215:
+/***/ 216:
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
@@ -1029,7 +1029,36 @@ module.exports = new EventEmitter();
 
 /***/ }),
 
-/***/ 37:
+/***/ 28:
+/***/ (function(module, exports) {
+
+module.exports = function(module) {
+	if(!module.webpackPolyfill) {
+		module.deprecate = function() {};
+		module.paths = [];
+		// module.parent = undefined by default
+		if(!module.children) module.children = [];
+		Object.defineProperty(module, "loaded", {
+			enumerable: true,
+			get: function() {
+				return module.l;
+			}
+		});
+		Object.defineProperty(module, "id", {
+			enumerable: true,
+			get: function() {
+				return module.i;
+			}
+		});
+		module.webpackPolyfill = 1;
+	}
+	return module;
+};
+
+
+/***/ }),
+
+/***/ 38:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1038,7 +1067,7 @@ module.exports = new EventEmitter();
 /* global __resourceQuery WorkerGlobalScope self */
 /* eslint prefer-destructuring: off */
 
-const url = __webpack_require__(38);
+const url = __webpack_require__(39);
 const stripAnsi = __webpack_require__(45);
 const log = __webpack_require__(47).getLogger('webpack-dev-server');
 const socket = __webpack_require__(48);
@@ -1280,7 +1309,7 @@ function reloadApp() {
 
 /***/ }),
 
-/***/ 38:
+/***/ 39:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1307,7 +1336,7 @@ function reloadApp() {
 
 
 
-var punycode = __webpack_require__(39);
+var punycode = __webpack_require__(40);
 var util = __webpack_require__(41);
 
 exports.parse = urlParse;
@@ -2020,7 +2049,7 @@ Url.prototype.parseHost = function() {
 
 /***/ }),
 
-/***/ 39:
+/***/ 40:
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(module, global) {var __WEBPACK_AMD_DEFINE_RESULT__;/*! https://mths.be/punycode v1.4.1 by @mathias */
@@ -2556,36 +2585,7 @@ Url.prototype.parseHost = function() {
 
 }(this));
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(40)(module), __webpack_require__(21)))
-
-/***/ }),
-
-/***/ 40:
-/***/ (function(module, exports) {
-
-module.exports = function(module) {
-	if(!module.webpackPolyfill) {
-		module.deprecate = function() {};
-		module.paths = [];
-		// module.parent = undefined by default
-		if(!module.children) module.children = [];
-		Object.defineProperty(module, "loaded", {
-			enumerable: true,
-			get: function() {
-				return module.l;
-			}
-		});
-		Object.defineProperty(module, "id", {
-			enumerable: true,
-			get: function() {
-				return module.i;
-			}
-		});
-		module.webpackPolyfill = 1;
-	}
-	return module;
-};
-
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(28)(module), __webpack_require__(17)))
 
 /***/ }),
 
@@ -8884,7 +8884,7 @@ module.exports = function lolcation(loc) {
 
 //# sourceMappingURL=sockjs.js.map
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(21)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(17)))
 
 /***/ }),
 
