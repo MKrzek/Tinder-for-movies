@@ -33,31 +33,51 @@ export default class FetchMovies extends React.Component{
     fetchMovies = () => {
     console.log(url);
     return fetch(url)
-        .then(r => r.json())
+        .then(r => {
+            if (r.ok)
+            return r.json();
+            else
+            throw new Error ('Errors')
+        })
         .then(data => {
             console.log('movie data', data)
             console.log('indexFetch', this.state.index);
             this.setState({
                 data: data[this.state.index]
             })
-            console.log('updated Fetch index', this.state.index)
         })
-
+        .catch(err => {
+            console.log(err);
+        });  
     };
 
     handleAccept=()=>{
+        const accept={accept:'true'};
         let index=this.state.index;
         index=index.toString().slice();
         let counter= parseInt(index);
         counter++
-        
         this.setState({
             index: counter
         })
-        this.fetchMovies()     
+        this.fetchMovies() 
+       return fetch(url + '/' + this.state.data.id,{
+
+            method: 'PUT',
+            body: JSON.stringify(accept),
+            headers: {
+                'Content-Type': 'application/json'
+            }
+            
+        }).then (r=>{
+            return r;
+        })   
+         console.log('this.state.data.id', this.state.data.id);
+         console.log ('accept', accept)
     };
 
     handleReject=()=>{
+      const accept = {accept: 'false'};
         let index=this.state.index;
         index=index.toString().slice();
         let counter=parseInt(index);
@@ -66,7 +86,17 @@ export default class FetchMovies extends React.Component{
             index:counter
         })
         this.fetchMovies()
-    };
+        return fetch(url + '/' + this.state.data.id, {
+                method: 'PUT',
+                body: JSON.stringify(accept),
+                headers: {
+                    'Content-Type': 'application/json'}
+                }).then(r => {
+                return r;
+})
+};
+
+
 
     renderMyMovie=()=>{
             if (this.state.index>=this.state.length){

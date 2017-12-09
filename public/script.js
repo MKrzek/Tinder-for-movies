@@ -61,7 +61,7 @@
 /******/ 	
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "df5871b16fbbcf70d5b3"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "f65627b137abef2a4afe"; // eslint-disable-line no-unused-vars
 /******/ 	var hotRequestTimeout = 10000;
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule; // eslint-disable-line no-unused-vars
@@ -32076,30 +32076,45 @@ var FetchMovies = function (_React$Component) {
         _this.fetchMovies = function () {
             console.log(url);
             return fetch(url).then(function (r) {
-                return r.json();
+                if (r.ok) return r.json();else throw new Error('Errors');
             }).then(function (data) {
                 console.log('movie data', data);
                 console.log('indexFetch', _this.state.index);
                 _this.setState({
                     data: data[_this.state.index]
                 });
-                console.log('updated Fetch index', _this.state.index);
+            }).catch(function (err) {
+                console.log(err);
             });
         };
 
         _this.handleAccept = function () {
+            var accept = { accept: 'true' };
             var index = _this.state.index;
             index = index.toString().slice();
             var counter = parseInt(index);
             counter++;
-
             _this.setState({
                 index: counter
             });
             _this.fetchMovies();
+            return fetch(url + '/' + _this.state.data.id, {
+
+                method: 'PUT',
+                body: JSON.stringify(accept),
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+
+            }).then(function (r) {
+                return r;
+            });
+            console.log('this.state.data.id', _this.state.data.id);
+            console.log('accept', accept);
         };
 
         _this.handleReject = function () {
+            var accept = { accept: 'false' };
             var index = _this.state.index;
             index = index.toString().slice();
             var counter = parseInt(index);
@@ -32108,6 +32123,14 @@ var FetchMovies = function (_React$Component) {
                 index: counter
             });
             _this.fetchMovies();
+            return fetch(url + '/' + _this.state.data.id, {
+                method: 'PUT',
+                body: JSON.stringify(accept),
+                headers: {
+                    'Content-Type': 'application/json' }
+            }).then(function (r) {
+                return r;
+            });
         };
 
         _this.renderMyMovie = function () {
