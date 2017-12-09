@@ -1,9 +1,9 @@
 import React from 'react';
-import DisplayMovie from './DisplayMovie.jsx'
+import FetchMovies from './FetchMovies.jsx'
 export default class App extends React.Component{
     render(){
         return <div>
-                <DisplayMovie/>
+                <FetchMovies/>
                </div>
     }
 }
