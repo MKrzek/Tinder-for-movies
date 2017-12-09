@@ -31,6 +31,7 @@ export default class FetchMovies extends React.Component{
    
 }
     render(){
+        console.log ('this', this)
         return(
             <div>
                 {this.renderMyMovie()}
