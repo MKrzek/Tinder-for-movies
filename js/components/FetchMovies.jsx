@@ -2,8 +2,8 @@ import React from 'react';
 import ReactTouchEvents from "react-touch-events";
 import DisplayMovie from './DisplayMovie.jsx';
 
-{/*const url = 'https://localhost:3000/movies';*/}
-const url='data.json';
+const url = 'https://localhost:3000/movies';
+{/*const url='data.json';*/}
 
 export default class FetchMovies extends React.Component{
     constructor (props){
