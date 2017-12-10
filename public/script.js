@@ -61,7 +61,7 @@
 /******/ 	
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "e19d6a033ba81f55cb0d"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "16f1b6a8e26380d39763"; // eslint-disable-line no-unused-vars
 /******/ 	var hotRequestTimeout = 10000;
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule; // eslint-disable-line no-unused-vars
@@ -32156,7 +32156,7 @@ var FetchMovies = function (_React$Component) {
                 return _react2.default.createElement(
                     'div',
                     null,
-                    _react2.default.createElement('img', { src: 'https://www.fukuleaks.org/web/wp-content/uploads/2014/05/shocked-kitten.jpeg' }),
+                    _react2.default.createElement('img', { src: 'https://cdn.empireonline.com/jpg/70/0/0/640/480/aspectfit/0/0/0/0/0/0/c/features/59395a49f68e659c7aa3a1a8/The%20Silence%20of%20the%20Lambs.jpg' }),
                     _react2.default.createElement(
                         'h2',
                         null,
