@@ -3,7 +3,9 @@ import ReactTouchEvents from "react-touch-events";
 import DisplayMovie from './DisplayMovie.jsx';
 
 const url = 'http://localhost:3000/movies';
+
 console.log ('url', url);
+
 export default class FetchMovies extends React.Component{
     constructor (props){
         super(props);

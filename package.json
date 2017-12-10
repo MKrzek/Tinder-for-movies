@@ -4,8 +4,7 @@
   "description": "Tinder for Movies",
   "main": "webpack.config.js",
   "scripts": {
-    "start": "webpack-dev-server --output-public-path=/public/",
-    "api": "json-server --watch data.json --port 3000"
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
   "license": "ISC",
