@@ -2,7 +2,8 @@ import React from 'react';
 import ReactTouchEvents from "react-touch-events";
 import DisplayMovie from './DisplayMovie.jsx';
 
-const url = 'http://localhost:3000/movies';
+const url = 'https://mkrzek.github.io/JsonFiles.json.js/';
+console.log ('urlgit', url)
 
 console.log ('url', url);
 
