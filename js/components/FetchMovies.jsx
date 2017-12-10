@@ -1,5 +1,7 @@
 import React from 'react';
+import ReactTouchEvents from "react-touch-events";
 import DisplayMovie from './DisplayMovie.jsx';
+
 const url = 'http://localhost:3000/movies';
 
 export default class FetchMovies extends React.Component{
@@ -13,7 +15,6 @@ export default class FetchMovies extends React.Component{
         } 
     }
     componentDidMount=()=>{
-         console.log ('mounted');
         this.fetchMovies()   
         this.fetchLength()
     };
@@ -26,7 +27,6 @@ export default class FetchMovies extends React.Component{
             datas: datas,
             length: datas.length
         })
-        console.log ('length', this.state.length)
        })
     }
 
@@ -40,8 +40,6 @@ export default class FetchMovies extends React.Component{
             throw new Error ('Errors')
         })
         .then(data => {
-            console.log('movie data', data)
-            console.log('indexFetch', this.state.index);
             this.setState({
                 data: data[this.state.index]
             })
@@ -52,6 +50,12 @@ export default class FetchMovies extends React.Component{
     };
 
     handleAccept=()=>{
+        this.acceptFetch()
+    };
+
+
+
+    acceptFetch=()=>{
         const accept={accept:'true'};
         let index=this.state.index;
         index=index.toString().slice();
@@ -62,21 +66,25 @@ export default class FetchMovies extends React.Component{
         })
         this.fetchMovies() 
        return fetch(url + '/' + this.state.data.id,{
-
             method: 'PUT',
             body: JSON.stringify(accept),
             headers: {
                 'Content-Type': 'application/json'
-            }
-            
+            }  
         }).then (r=>{
             return r;
         })   
          console.log('this.state.data.id', this.state.data.id);
          console.log ('accept', accept)
     };
-
+q   
     handleReject=()=>{
+        console.log('This', this)
+        this.rejectFetch()
+    };
+
+
+    rejectFetch=()=>{
       const accept = {accept: 'false'};
         let index=this.state.index;
         index=index.toString().slice();
@@ -96,13 +104,26 @@ export default class FetchMovies extends React.Component{
 })
 };
 
+handleSwipe=(direction)=>{
+    switch(direction){
+        case 'right':
+           return this.acceptFetch();
+        case 'left':
+           return this.rejectFetch();
+                  console.log (`you swiped ${direction}`)
+    }
+}
+
 
 
     renderMyMovie=()=>{
-            if (this.state.index>=this.state.length){
-                return <h2>No more data to display</h2>
-            }else{
-                return <DisplayMovie key={this.state.data.id} 
+        if (this.state.index>=this.state.length){
+            return (<div>
+                       <img src='http://www.fukuleaks.org/web/wp-content/uploads/2014/05/shocked-kitten.jpeg'/>
+                    <h2>No more data to display</h2>
+                    </div>)
+        }else{
+            return <DisplayMovie key={this.state.data.id} 
                                  data={this.state.data} 
                                  handleAccept={this.handleAccept}
                                  handleReject={this.handleReject}/>  
@@ -112,8 +133,13 @@ export default class FetchMovies extends React.Component{
     render(){
         return(
             <div>
-                {this.renderMyMovie()}
-            </div>
+                <div>
+                    {this.renderMyMovie()}
+                </div>
+                <div>
+                    <ReactTouchEvents onSwipe={this.handleSwipe}/>
+                </div>
+             </div>
         )
     }
 };
