@@ -2,7 +2,7 @@ import React from 'react';
 import ReactTouchEvents from "react-touch-events";
 import DisplayMovie from './DisplayMovie.jsx';
 
-{/*const url = 'https://localhost:3000/movies';*/}
+{/*const url = 'http://localhost:3000/movies';*/}
 const url='data.json';
 
 export default class FetchMovies extends React.Component{
@@ -66,7 +66,7 @@ export default class FetchMovies extends React.Component{
             index: counter
         })
         this.fetchMovies() 
-       return fetch(url + '/' + this.state.data.id,{
+       return fetch('data.json/' + this.state.data.id,{
             method: 'PUT',
             body: JSON.stringify(accept),
             headers: {
@@ -95,7 +95,7 @@ q
             index:counter
         })
         this.fetchMovies()
-        return fetch(url + '/' + this.state.data.id, {
+        return fetch('data.json/' + this.state.data.id, {
                 method: 'PUT',
                 body: JSON.stringify(accept),
                 headers: {
