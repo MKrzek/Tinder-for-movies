@@ -61,7 +61,7 @@
 /******/ 	
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "563b28cfe0ee700ea3b2"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "0718858ad9d3386af4bb"; // eslint-disable-line no-unused-vars
 /******/ 	var hotRequestTimeout = 10000;
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule; // eslint-disable-line no-unused-vars
@@ -32049,8 +32049,8 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-{/*const url = 'http://localhost:3000/movies';*/}
-var url = 'data.json';
+var url = 'http://localhost:3000/movies';
+console.log('url', url);
 
 var FetchMovies = function (_React$Component) {
     _inherits(FetchMovies, _React$Component);
@@ -32077,7 +32077,6 @@ var FetchMovies = function (_React$Component) {
         };
 
         _this.fetchMovies = function () {
-            console.log(url);
             return fetch(url).then(function (r) {
                 if (r.ok) return r.json();else throw new Error('Errors');
             }).then(function (data) {
@@ -32103,7 +32102,7 @@ var FetchMovies = function (_React$Component) {
                 index: counter
             });
             _this.fetchMovies();
-            return fetch('data.json/' + _this.state.data.id, {
+            return fetch(url + '/' + _this.state.data.id, {
                 method: 'PUT',
                 body: JSON.stringify(accept),
                 headers: {
@@ -32117,7 +32116,7 @@ var FetchMovies = function (_React$Component) {
         };
 
         _this.handleReject = function () {
-            console.log('This', _this);
+
             _this.rejectFetch();
         };
 
@@ -32131,7 +32130,7 @@ var FetchMovies = function (_React$Component) {
                 index: counter
             });
             _this.fetchMovies();
-            return fetch('data.json/' + _this.state.data.id, {
+            return fetch(url + '/' + _this.state.data.id, {
                 method: 'PUT',
                 body: JSON.stringify(accept),
                 headers: {

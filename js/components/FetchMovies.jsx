@@ -2,9 +2,8 @@ import React from 'react';
 import ReactTouchEvents from "react-touch-events";
 import DisplayMovie from './DisplayMovie.jsx';
 
-{/*const url = 'http://localhost:3000/movies';*/}
-const url='data.json';
-
+const url = 'http://localhost:3000/movies';
+console.log ('url', url);
 export default class FetchMovies extends React.Component{
     constructor (props){
         super(props);
@@ -32,7 +31,6 @@ export default class FetchMovies extends React.Component{
     }
 
     fetchMovies = () => {
-    console.log(url);
     return fetch(url)
         .then(r => {
             if (r.ok)
@@ -66,7 +64,7 @@ export default class FetchMovies extends React.Component{
             index: counter
         })
         this.fetchMovies() 
-       return fetch('data.json/' + this.state.data.id,{
+       return fetch(url + '/' + this.state.data.id,{
             method: 'PUT',
             body: JSON.stringify(accept),
             headers: {
@@ -80,7 +78,7 @@ export default class FetchMovies extends React.Component{
     };
 q   
     handleReject=()=>{
-        console.log('This', this)
+        
         this.rejectFetch()
     };
 
@@ -95,7 +93,7 @@ q
             index:counter
         })
         this.fetchMovies()
-        return fetch('data.json/' + this.state.data.id, {
+        return fetch(url +'/'+ this.state.data.id, {
                 method: 'PUT',
                 body: JSON.stringify(accept),
                 headers: {
@@ -120,8 +118,8 @@ handleSwipe=(direction)=>{
     renderMyMovie=()=>{
         if (this.state.index>=this.state.length){
             return (<div>
-< img src = 'https://cdn.empireonline.com/jpg/70/0/0/640/480/aspectfit/0/0/0/0/0/0/c/features/59395a49f68e659c7aa3a1a8/The%20Silence%20of%20the%20Lambs.jpg'/>
-                    <h2>No more data to display</h2>
+                        <img src='https://cdn.empireonline.com/jpg/70/0/0/640/480/aspectfit/0/0/0/0/0/0/c/features/59395a49f68e659c7aa3a1a8/The%20Silence%20of%20the%20Lambs.jpg'/>
+                        <h2>No more data to display</h2>
                     </div>)
         }else{
             return <DisplayMovie key={this.state.data.id} 
@@ -129,8 +127,8 @@ handleSwipe=(direction)=>{
                                  handleAccept={this.handleAccept}
                                  handleReject={this.handleReject}/>  
             }
-        
-};
+};       
+
     render(){
         return(
             <div>
