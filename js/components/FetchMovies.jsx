@@ -1,9 +1,8 @@
 import React from 'react';
 import ReactTouchEvents from "react-touch-events";
 import DisplayMovie from './DisplayMovie.jsx';
-
-const url = 'https://mkrzek.github.io/JsonFiles.json.js/';
-console.log ('urlgit', url)
+const cors = require('cors')({origin: true});
+const url = 'https://firebasestorage.googleapis.com/v0/b/tinder-for-movies.appspot.com/o/data.json?alt=media&token=64490793-b17a-4896-aeaf-73b8f65da2b6';
 
 console.log ('url', url);
 
@@ -23,14 +22,19 @@ export default class FetchMovies extends React.Component{
     };
 
     fetchLength=()=>{
+       exports.date=functions.https.onRequest((req, r)=>{
+           cors(req, r,()=>{
+               response.status(200).send({test: 'testing functions'});
+           })
        return fetch (url)
        .then(r=>r.json())
        .then(datas=>{
         this.setState({
-            datas: datas,
-            length: datas.length
+            
+            length: datas.movies.length
         })
        })
+    })
     }
 
     fetchMovies = () => {
@@ -43,7 +47,7 @@ export default class FetchMovies extends React.Component{
         })
         .then(data => {
             this.setState({
-                data: data[this.state.index]
+                data: data.movies[this.state.index]
             })
         })
         .catch(err => {
@@ -55,8 +59,6 @@ export default class FetchMovies extends React.Component{
         this.acceptFetch()
     };
 
-
-
     acceptFetch=()=>{
         const accept={accept:'true'};
         let index=this.state.index;
@@ -66,8 +68,8 @@ export default class FetchMovies extends React.Component{
         this.setState({
             index: counter
         })
-        this.fetchMovies() 
-       return fetch(url + '/' + this.state.data.id,{
+        this.fetchMovies();
+       {/*return fetch(url + '/' + this.state.data.movies.id,{
             method: 'PUT',
             body: JSON.stringify(accept),
             headers: {
@@ -75,11 +77,11 @@ export default class FetchMovies extends React.Component{
             }  
         }).then (r=>{
             return r;
-        })   
-         console.log('this.state.data.id', this.state.data.id);
-         console.log ('accept', accept)
+        }) 
+         console.log('this.state.data.id', this.state.data.movies.id);
+    console.log ('accept', accept)*/}
     };
-q   
+ 
     handleReject=()=>{
         
         this.rejectFetch()
@@ -95,15 +97,15 @@ q
         this.setState({
             index:counter
         })
-        this.fetchMovies()
-        return fetch(url +'/'+ this.state.data.id, {
+        {/*this.fetchMovies()
+        return fetch(url +'/'+ this.state.data.movies.id, {
                 method: 'PUT',
                 body: JSON.stringify(accept),
                 headers: {
                     'Content-Type': 'application/json'}
                 }).then(r => {
                 return r;
-})
+})*/}
 };
 
 handleSwipe=(direction)=>{
@@ -121,8 +123,12 @@ handleSwipe=(direction)=>{
     renderMyMovie=()=>{
         if (this.state.index>=this.state.length){
             return (<div>
-                        <img src='https://cdn.empireonline.com/jpg/70/0/0/640/480/aspectfit/0/0/0/0/0/0/c/features/59395a49f68e659c7aa3a1a8/The%20Silence%20of%20the%20Lambs.jpg'/>
-                        <h2>No more data to display</h2>
+                        <div className='row justify-content-center'>
+                             <img className='rounded image' src='https://cdn.empireonline.com/jpg/70/0/0/640/480/aspectfit/0/0/0/0/0/0/c/features/59395a49f68e659c7aa3a1a8/The%20Silence%20of%20the%20Lambs.jpg'/>
+                        </div>
+                        <div className='row'>
+                            <h2 className='col text-center'>No more data to display</h2>
+                        </div>
                     </div>)
         }else{
             return <DisplayMovie key={this.state.data.id} 
@@ -134,7 +140,8 @@ handleSwipe=(direction)=>{
 
     render(){
         return(
-            <div>
+            <div className='container'>
+                
                 <div>
                     {this.renderMyMovie()}
                 </div>
